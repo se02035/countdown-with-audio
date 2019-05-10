@@ -7,11 +7,6 @@ param(
     [decimal]
     $durationAudioInSec = -1,
 
-    [Parameter(Mandatory = $true)]
-    [Alias("mp")] 
-    [system.windows.media.mediaplayer]
-    $mediaPlayer,
-
     [Alias("ap")] 
     [string]
     $audioPath = "audio"
@@ -24,6 +19,13 @@ param(
 
 Clear-Host;
 
+# get the mediaplayer instance and store it as a global variable when
+# running the countdown multiple times
+if (!$global:countdown_mplayer) {
+    Add-Type -AssemblyName presentationCore; 
+    $global:countdown_mplayer = New-Object system.windows.media.mediaplayer;
+}
+$mediaPlayer = $global:countdown_mplayer
 $mediaPlayer.Stop();
 
 # randomly pick one audio file that should be played at the end of the countdown
@@ -38,6 +40,7 @@ countdown $durationCountdown
 # start audio playback
 $mediaPlayer.open($soundfile);
 $mediaPlayer.Play();
+
 # if configured, stop the audio after x seconds. 
 # else the entire audio file will be played
 If ($durationAudioInSec -gt 0) {
