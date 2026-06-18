@@ -58,3 +58,44 @@ Other examples:
 ```
 
 Audio playback uses the built-in `afplay` command (no extra audio install needed). The `countdown` binary must be available on your `PATH`.
+
+## Browser
+
+A static web version lives in [`web/`](web/). It uses the same defaults as the CLI scripts and plays tracks from the existing `.lyria` folder.
+
+### Run locally
+
+From the repository root:
+
+```bash
+python3 -m http.server 8000
+```
+
+Open [http://localhost:8000/web/](http://localhost:8000/web/) in your browser.
+
+### Parameters
+
+| Query param | Values |
+|---|---|
+| `d` | **Duration countdown.** Examples: `27s`, `1m`, `2m3s` (*default: `1m30s`*) |
+| `a` | **Duration audio.** Seconds of playback. Values `<= 0` play the entire file (*default: `-1`*) |
+| `track` | **Track name.** A filename from `web/manifest.json`, or omit for random selection |
+
+Examples:
+
+- [http://localhost:8000/web/?d=1m](http://localhost:8000/web/?d=1m)
+- [http://localhost:8000/web/?d=1m&a=10](http://localhost:8000/web/?d=1m&a=10)
+- [http://localhost:8000/web/?d=30s&track=speech%20(7).wav](http://localhost:8000/web/?d=30s&track=speech%20(7).wav)
+
+### Deploy to GitHub Pages
+
+1. Push the repository to GitHub.
+2. In repository settings, enable GitHub Pages for the default branch.
+3. Open `https://<username>.github.io/<repo>/web/`.
+
+The repo includes a [`.nojekyll`](.nojekyll) file so dot-folders like `.lyria` are published.
+
+### Add tracks
+
+1. Place new `.wav` files in `.lyria`.
+2. Add each filename to [`web/manifest.json`](web/manifest.json).
