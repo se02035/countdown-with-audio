@@ -1,21 +1,42 @@
 param(
-    [Alias("dc")] 
+    [Alias("d")]
     [string]
     $durationCountdown = "1m30s",
 
-    [Alias("da")] 
+    [Alias("a")]
     [decimal]
     $durationAudioInSec = -1,
 
-    [Alias("ap")] 
+    [Alias("p")]
     [string]
-    $audioPath = "audio"
+    $audioPath = ".lyria",
+
+    [Alias("h")]
+    [switch]
+    $Help
 
     # # only needed for option #1 - npm package
-    # [Alias("c")] 
+    # [Alias("c")]
     # [decimal]
     # $cycle = 1000
 )
+
+function Show-Usage {
+    $name = Split-Path -Leaf $PSCommandPath
+    Write-Host @"
+Usage: $name [-d duration] [-a audio_seconds] [-p audio_path]
+
+  -d  Duration countdown (default: 1m30s). Examples: 27s, 1m, 2m3s
+  -a  Duration audio in seconds (default: -1). Values <= 0 play the entire file
+  -p  Audio path (default: .lyria)
+  -h  Show this help
+"@
+}
+
+if ($Help) {
+    Show-Usage
+    exit 0
+}
 
 Clear-Host;
 

@@ -2,7 +2,7 @@
 
 durationCountdown="1m30s"
 durationAudioInSec="-1"
-audioPath="audio"
+audioPath=".lyria"
 
 usage() {
     cat <<EOF
@@ -10,7 +10,7 @@ Usage: $(basename "$0") [-d duration] [-a audio_seconds] [-p audio_path]
 
   -d  Duration countdown (default: 1m30s). Examples: 27s, 1m, 2m3s
   -a  Duration audio in seconds (default: -1). Values <= 0 play the entire file
-  -p  Audio path (default: audio)
+  -p  Audio path (default: .lyria)
   -h  Show this help
 EOF
 }
