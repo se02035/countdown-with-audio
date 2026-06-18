@@ -1,5 +1,7 @@
 # Console countdown with audio playback
 
+Access the latest web version here: [countdown-with-audio](https://se02035.github.io/countdown-with-audio/web/)
+
 ## Install
 
 ### Download audio assets
